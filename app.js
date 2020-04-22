@@ -12,8 +12,8 @@ class fetchInit {
 
 document.querySelector("form").addEventListener("submit", event => {
     event.preventDefault();
-    const username = document.querySelector("#username").value;
-    const password = document.querySelector("#password").value;
+    const username = event.target.elements.username.value;
+    const password = event.target.elements.password.value;
     const data = { username, password };
     const newInit = new fetchInit(data);
 
