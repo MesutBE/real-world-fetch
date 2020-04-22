@@ -12,9 +12,9 @@ class fetchInit {
 
 document.querySelector("form").addEventListener("submit", event => {
     event.preventDefault();
-    const username = document.querySelector("#username").value;
-    const password = document.querySelector("#password").value;
-    const data = { username, password };
+    debugger
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
     const newInit = new fetchInit(data);
 
     fetch("https://reqres.in/api/users", newInit)
