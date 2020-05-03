@@ -1,21 +1,11 @@
-class fetchInit {
-    method = '';
-    body = '';
-    headers = '';
-
-    constructor (data){
-        this.method = "POST";
-        this.body = JSON.stringify(data);
-        this.headers = { "content-type": "application/json" };
-    }
-}
 
 document.querySelector("form").addEventListener("submit", event => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
+    // const data = Object.fromEntries(formData); // data.pokemonName => the code below is easy to use instead of this
+    const pokemonName = formData.get("pokemonName");
 
-    fetch(`https://pokeapi.co/api/v2/pokemon/${data.pokemonName}`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
         .then(response => {
             if (!response.ok) throw new Error(response.status);
             return response.json();
@@ -37,7 +27,7 @@ document.querySelector("form").addEventListener("submit", event => {
         })
         .catch(error => {
             const divEl = document.createElement('div');
-            divEl.innerText = `! Couldn't find \"${data.pokemonName}\"`
+            divEl.innerText = `! Couldn't find \"${pokemonName}\"`
             
             const resultEl = document.getElementById('result');
             resultEl.appendChild(divEl);
